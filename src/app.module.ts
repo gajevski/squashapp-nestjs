@@ -5,9 +5,10 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TerminusModule, HttpModule, AuthModule, UsersModule],
+  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
