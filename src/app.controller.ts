@@ -9,7 +9,7 @@ import { JwtGuard } from './auth/jwt.auth.guard';
 export class AppController {
   constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _authService: AuthService) { }
 
-  @Get('v1/squash/status')
+  @Get('v1/status')
   @HealthCheck()
   statusCheck() {
     return this._healthCheckService.check([
