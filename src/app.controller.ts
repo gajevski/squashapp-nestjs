@@ -3,6 +3,7 @@ import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/te
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtGuard } from './auth/jwt.auth.guard';
+import { User } from './users/users.service';
 
 @Controller()
 export class AppController {
@@ -24,7 +25,7 @@ export class AppController {
 
   @UseGuards(JwtGuard)
   @Get('/v1/user/profile')
-  getProfile(@Request() req) {
+  getProfile(@Request() req): User {
     return req.user;
   }
 }
