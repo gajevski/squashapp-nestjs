@@ -1,14 +1,15 @@
 import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
 import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
-import { User } from './users/users.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
+import { JwtGuard } from './auth/jwt.auth.guard';
+import { User } from './users/users.service';
 
 @Controller()
 export class AppController {
   constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _authService: AuthService) { }
 
-  @Get('v1/squash/status')
+  @Get('v1/status')
   @HealthCheck()
   statusCheck() {
     return this._healthCheckService.check([
@@ -20,5 +21,11 @@ export class AppController {
   @Post('/v1/auth/login')
   async login(@Request() req): Promise<{ access_token: string }> {
     return this._authService.login(req.user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/v1/user/profile')
+  getProfile(@Request() req): User {
+    return req.user;
   }
 }
