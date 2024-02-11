@@ -1,6 +1,5 @@
 import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
 import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
-import { User } from './users/users.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtGuard } from './auth/jwt.auth.guard';
