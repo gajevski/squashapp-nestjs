@@ -3,7 +3,7 @@ import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/te
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtGuard } from './auth/jwt.auth.guard';
-import { User } from './users/users.service';
+import { User } from './models/user';
 
 @Controller()
 export class AppController {
