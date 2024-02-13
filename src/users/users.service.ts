@@ -8,30 +8,29 @@ export interface User {
     racket: Racket
     statistics: Statistics
     activities: Activity[]
-  }
-  
-  export interface Racket {
+}
+
+export interface Racket {
     name: string
     image: string
     purchaseDate: string
     totalMatchesPlayed: number
     grip: string
     string: string
-  }
-  
-  export interface Statistics {
+}
+
+export interface Statistics {
     matchesPlayed: number
     matchesWon: number
     matchesLost: number
     winratio: number
-  }
-  
-  export interface Activity {
+}
+
+export interface Activity {
     id: number
     activityName: string
     date: string
-  }
-  
+}
 
 @Injectable()
 export class UsersService {
@@ -61,7 +60,6 @@ export class UsersService {
             ]
         },
     ]
-
 
     async findUser(username: string): Promise<User | undefined> {
         return this.users.find((user: User) => user.username === username);
