@@ -1,36 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
-export interface User {
-    userId: number
-    username: string
-    password: string
-    image: string
-    racket: Racket
-    statistics: Statistics
-    activities: Activity[]
-}
-
-export interface Racket {
-    name: string
-    image: string
-    purchaseDate: string
-    totalMatchesPlayed: number
-    grip: string
-    string: string
-}
-
-export interface Statistics {
-    matchesPlayed: number
-    matchesWon: number
-    matchesLost: number
-    winratio: number
-}
-
-export interface Activity {
-    id: number
-    activityName: string
-    date: string
-}
+import { User } from 'src/models/user';
 
 @Injectable()
 export class UsersService {
