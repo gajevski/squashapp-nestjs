@@ -1,3 +1,7 @@
+import { Activity } from "./activity"
+import { Racket } from "./racket"
+import { Statistics } from "./statistics"
+
 export interface User {
     userId: number
     username: string
