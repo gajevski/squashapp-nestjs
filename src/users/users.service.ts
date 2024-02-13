@@ -1,10 +1,37 @@
 import { Injectable } from '@nestjs/common';
 
-export type User = {
-    userId: number;
-    username: string;
-    password: string;
-}
+export interface User {
+    userId: number
+    username: string
+    password: string
+    image: string
+    racket: Racket
+    statistics: Statistics
+    activities: Activity[]
+  }
+  
+  export interface Racket {
+    name: string
+    image: string
+    purchaseDate: string
+    totalMatchesPlayed: number
+    grip: string
+    string: string
+  }
+  
+  export interface Statistics {
+    matchesPlayed: number
+    matchesWon: number
+    matchesLost: number
+    winratio: number
+  }
+  
+  export interface Activity {
+    id: number
+    activityName: string
+    date: string
+  }
+  
 
 @Injectable()
 export class UsersService {
@@ -35,28 +62,6 @@ export class UsersService {
         },
     ]
 
-    //     Username: "Mikolaj",
-    //     ID:       1,
-    //     Image:    "https://avatars.githubusercontent.com/u/29663156?v=4",
-    //     Racket: Racket{
-    //         Name:                "Wilson Hyper Hammer 120",
-    //         Image:               "https://www.squashtime.pl/images/thumbs/640_720/WRT967700_wilson_01.jpg",
-    //         PurchaseDate:        "October 2023",
-    //         PlayedMatchesAmount: 26,
-    //         Grip:                "Toalson Ultra Grip 3Pack Black",
-    //         String:              "Default",
-    //     },
-    //     Statistics: Statistics{
-    //         MatchesPlayed: totalMatches,
-    //         MatchesWon:    matchesWon,
-    //         MatchesLost:   matchesLost,
-    //         Winratio:      int(winratio),
-    //     },
-    //     Activities: []Activity{
-    //         {Id: 1, ActivityName: "Squash Match", Date: "2023-10-01"},
-    //         {Id: 2, ActivityName: "Training Session", Date: "2023-10-02"},
-    //     },
-    // }
 
     async findUser(username: string): Promise<User | undefined> {
         return this.users.find((user: User) => user.username === username);
