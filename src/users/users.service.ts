@@ -6,7 +6,7 @@ export class UsersService {
     private readonly users: User[] = [
         {
             userId: 1,
-            username: "First",
+            username: "first",
             password: "first",
             image: "https://avatars.githubusercontent.com/u/29663156?v=4",
             racket: {
