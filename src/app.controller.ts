@@ -4,6 +4,7 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtGuard } from './auth/jwt.auth.guard';
 import { User } from './models/user';
+import { users } from './users/users.service';
 
 @Controller()
 export class AppController {
@@ -25,7 +26,7 @@ export class AppController {
 
   @UseGuards(JwtGuard)
   @Get('/v1/user/profile')
-  getProfile(@Request() req): User {
-    return req.user;
+  getProfile(@Request() req): User | undefined {
+    return users.find((user: User) => user.userId === req.user.userId);
   }
 }
