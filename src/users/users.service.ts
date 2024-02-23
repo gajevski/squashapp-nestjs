@@ -35,12 +35,40 @@ export class UsersService {
         return users.find((user: User) => user.username === username);
     }
 
-    async createUser(user: User): Promise<User> {
-        const existingUser: User | undefined = await this.findUser(user.username);
+    async createUser(username: string, password: string): Promise<User> {
+        const existingUser = users.find(user => user.username === username);
         if (existingUser) {
           throw new Error('User already exists');
         }
-        users.push(user);
-        return user;
+    
+        const newUser: User = this._createUserObject(username, password);
+    
+        users.push(newUser);
+    
+        return newUser;
+      }
+
+      private _createUserObject(username: string, password: string): User {
+        return {
+            userId: Date.now(),
+            username: username,
+            password: password,
+            image: "",
+            racket: {
+              name: "",
+              image: "",
+              purchaseDate: "",
+              totalMatchesPlayed: 0,
+              grip: "",
+              string: ""
+            },
+            statistics: {
+              matchesPlayed: 0,
+              matchesWon: 0,
+              matchesLost: 0,
+              winratio: 0,
+            },
+            activities: []
+          };
       }
 }
