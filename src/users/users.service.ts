@@ -36,7 +36,11 @@ export class UsersService {
     }
 
     async createUser(user: User): Promise<User> {
+        const existingUser: User | undefined = await this.findUser(user.username);
+        if (existingUser) {
+          throw new Error('User already exists');
+        }
         users.push(user);
         return user;
-    }
+      }
 }
