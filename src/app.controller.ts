@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards, Request, BadRequestException } from '@nestjs/common';
 import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -22,6 +22,23 @@ export class AppController {
   @Post('/v1/auth/login')
   async login(@Request() req): Promise<{ access_token: string }> {
     return this._authService.login(req.user);
+  }
+  
+  @UseGuards(LocalAuthGuard)
+  @Post('/v1/auth/register')
+  async register(@Request() req): Promise<{ access_token: string }> {
+    const { username, password, confirmPassword } = req.body;
+
+    if (!username || !password) {
+      throw new BadRequestException('Username and password are required');
+    }
+    if (password !== confirmPassword) {
+      throw new BadRequestException('Passwords do not match');
+    }
+
+    const user: User = { username, password };
+
+    return this._authService.register(user);
   }
 
   @UseGuards(JwtGuard)
