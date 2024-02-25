@@ -54,14 +54,7 @@ export class UsersService {
             username: username,
             password: password,
             image: "",
-            racket: {
-              name: "",
-              image: "",
-              purchaseDate: "",
-              totalMatchesPlayed: 0,
-              grip: "",
-              string: ""
-            },
+            racket: null,
             statistics: {
               matchesPlayed: 0,
               matchesWon: 0,
