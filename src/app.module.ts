@@ -6,9 +6,10 @@ import { HttpModule } from '@nestjs/axios';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { BasicTutorialModule } from './basic-tutorial/basic-tutorial.module';
 
 @Module({
-  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, ConfigModule.forRoot()],
+  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
