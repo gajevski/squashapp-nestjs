@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { BasicTutorialService } from './basic-tutorial/basic-tutorial.service';
 
-@Module({})
+@Module({
+  providers: [BasicTutorialService]
+})
 export class BasicTutorialModule {}
