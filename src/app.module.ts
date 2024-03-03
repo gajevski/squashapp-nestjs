@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BasicTutorialModule } from './basic-tutorial/basic-tutorial.module';
 
 @Module({
-  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, ConfigModule.forRoot(), BasicTutorialModule],
+  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
