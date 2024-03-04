@@ -6,8 +6,9 @@ import { JwtGuard } from './auth/jwt.auth.guard';
 import { User } from './models/user';
 import { users } from './users/users.service';
 import { RegisterDTO } from './models/register';
-import { BasicTutorialService } from './basic-tutorial/basic-tutorial.service';
+import { BasicTutorialService, progress } from './basic-tutorial/basic-tutorial.service';
 import { UpdateBasicTutorialDto } from './models/update-basic-tutorial';
+import { BasicTutorial } from './models/basic-tutorial';
 
 @Controller()
 export class AppController {
@@ -26,7 +27,7 @@ export class AppController {
   async login(@Request() req): Promise<{ access_token: string }> {
     return this._authService.login(req.user);
   }
-  
+
   @Post('/v1/auth/register')
   async register(@Body() registerDTO: RegisterDTO): Promise<{ access_token: string }> {
     const { username, password, confirmPassword } = registerDTO;
@@ -40,10 +41,18 @@ export class AppController {
 
     return this._authService.register(username, password);
   }
-  
+
+  @UseGuards(JwtGuard)
   @Put('/v1/basic-tutorial/progress')
   async updateBasicTutorialProgress(@Body() basicTutorialRequest: UpdateBasicTutorialDto) {
     return this._basicTutorialService.updateBasicTutorialProgress(basicTutorialRequest);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/v1/basic-tutorial/progress')
+  async getBasicTutorialProgress(@Request() req) {
+    console.log(req.user);
+    return progress.find((basicTutorial: BasicTutorial) => basicTutorial.userId === req.user.userId);
   }
 
   @UseGuards(JwtGuard)
