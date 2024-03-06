@@ -14,8 +14,8 @@ export const progress: BasicTutorial[] = [
 @Injectable()
 export class BasicTutorialService {
 
-  async updateBasicTutorialProgress(basicTutorialRequest: BasicTutorial): Promise<BasicTutorial | null> {
-    const progressToUpdateIndex: number = progress.findIndex((basicTutorial: BasicTutorial) => basicTutorial.userId === basicTutorialRequest.userId);
+  async updateBasicTutorialProgress(userId: number, basicTutorialRequest: BasicTutorial): Promise<BasicTutorial | null> {
+    const progressToUpdateIndex: number = progress.findIndex((basicTutorial: BasicTutorial) => basicTutorial.userId === userId);
 
     if (progressToUpdateIndex !== -1) {
       const currentProgress: BasicTutorial = progress[progressToUpdateIndex];
