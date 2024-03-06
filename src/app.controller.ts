@@ -44,14 +44,13 @@ export class AppController {
 
   @UseGuards(JwtGuard)
   @Put('/v1/basic-tutorial/progress')
-  async updateBasicTutorialProgress(@Body() basicTutorialRequest: UpdateBasicTutorialDto) {
-    return this._basicTutorialService.updateBasicTutorialProgress(basicTutorialRequest);
+  async updateBasicTutorialProgress(@Request() req, @Body() basicTutorialRequest: UpdateBasicTutorialDto) {
+    return this._basicTutorialService.updateBasicTutorialProgress(req.user.userId, basicTutorialRequest);
   }
 
   @UseGuards(JwtGuard)
   @Get('/v1/basic-tutorial/progress')
   async getBasicTutorialProgress(@Request() req) {
-    console.log(req.user);
     return progress.find((basicTutorial: BasicTutorial) => basicTutorial.userId === req.user.userId);
   }
 
