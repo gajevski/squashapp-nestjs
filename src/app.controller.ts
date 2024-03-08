@@ -55,6 +55,13 @@ export class AppController {
   }
 
   @UseGuards(JwtGuard)
+  @Get('/v1/basic-tutorial/progress')
+  async getAdvancedTutorialProgress(@Request() req) {
+    // TODO: fix type
+    return progress.find((advancedTutorial: any) => advancedTutorial.userId === req.user.userId);
+  }
+
+  @UseGuards(JwtGuard)
   @Get('/v1/user/profile')
   getProfile(@Request() req): User | undefined {
     return users.find((user: User) => user.userId === req.user.userId);
