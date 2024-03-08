@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BasicTutorial } from 'src/models/basic-tutorial';
 
-export const progress: BasicTutorial[] = [
+export const basicTutorialProgress: BasicTutorial[] = [
   {
     userId: 1,
     isServeFinished: false,
@@ -15,15 +15,15 @@ export const progress: BasicTutorial[] = [
 export class BasicTutorialService {
 
   async updateBasicTutorialProgress(userId: number, basicTutorialRequest: BasicTutorial): Promise<BasicTutorial | null> {
-    const progressToUpdateIndex: number = progress.findIndex((basicTutorial: BasicTutorial) => basicTutorial.userId === userId);
+    const progressToUpdateIndex: number = basicTutorialProgress.findIndex((basicTutorial: BasicTutorial) => basicTutorial.userId === userId);
 
     if (progressToUpdateIndex !== -1) {
-      const currentProgress: BasicTutorial = progress[progressToUpdateIndex];
+      const currentProgress: BasicTutorial = basicTutorialProgress[progressToUpdateIndex];
       const updatedProgress = {
         ...currentProgress,
         ...basicTutorialRequest,
       };
-      progress[progressToUpdateIndex] = updatedProgress;
+      basicTutorialProgress[progressToUpdateIndex] = updatedProgress;
       return updatedProgress;
     } else {
       console.error(`User with ID ${basicTutorialRequest.userId} not found.`);

@@ -6,13 +6,14 @@ import { JwtGuard } from './auth/jwt.auth.guard';
 import { User } from './models/user';
 import { users } from './users/users.service';
 import { RegisterDTO } from './models/register';
-import { BasicTutorialService, progress } from './basic-tutorial/basic-tutorial.service';
+import { BasicTutorialService, basicTutorialProgress } from './basic-tutorial/basic-tutorial.service';
 import { UpdateBasicTutorialDto } from './models/update-basic-tutorial';
 import { BasicTutorial } from './models/basic-tutorial';
+import { AdvancedTutorialService, advancedTutorialProgress } from './advanced-tutorial/advanced-tutorial.service';
 
 @Controller()
 export class AppController {
-  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _authService: AuthService, private _basicTutorialService: BasicTutorialService) { }
+  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _authService: AuthService, private _basicTutorialService: BasicTutorialService, private _advancedTutorialService: AdvancedTutorialService) { }
 
   @Get('v1/status')
   @HealthCheck()
@@ -51,7 +52,20 @@ export class AppController {
   @UseGuards(JwtGuard)
   @Get('/v1/basic-tutorial/progress')
   async getBasicTutorialProgress(@Request() req) {
-    return progress.find((basicTutorial: BasicTutorial) => basicTutorial.userId === req.user.userId);
+    return basicTutorialProgress.find((basicTutorial: BasicTutorial) => basicTutorial.userId === req.user.userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Put('/v1/advanced-tutorial/progress')
+  async updateAdvancedTutorialProgress(@Request() req, @Body() advancedTutorialRequest: any) {
+    return this._advancedTutorialService.updateAdvancedTutorialProgress(req.user.userId, advancedTutorialRequest);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/v1/advanced-tutorial/progress')
+  async getAdvancedTutorialProgress(@Request() req) {
+    // TODO: fix type
+    return advancedTutorialProgress.find((advancedTutorial: any) => advancedTutorial.userId === req.user.userId);
   }
 
   @UseGuards(JwtGuard)
