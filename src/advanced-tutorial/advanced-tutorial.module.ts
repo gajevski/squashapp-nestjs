@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { BasicTutorialService } from './advanced-tutorial.service';
+import { AdvancedTutorialService } from './advanced-tutorial.service';
 
 @Module({
-  providers: [BasicTutorialService],
-  exports: [BasicTutorialService]
+  providers: [AdvancedTutorialService],
+  exports: [AdvancedTutorialService]
 })
-export class BasicTutorialModule {}
+export class AdvancedTutorialModule {}
