@@ -4,10 +4,10 @@ import { Injectable } from '@nestjs/common';
 export const advancedTutorialProgress: any[] = [
   {
     userId: 1,
-    isServeFinished: false,
-    isRallyFinished: false,
-    isBalloutFinished: false,
-    isScoringFinished: false
+    one: false,
+    two: false,
+    three: false,
+    four: false
   }
 ]
 
