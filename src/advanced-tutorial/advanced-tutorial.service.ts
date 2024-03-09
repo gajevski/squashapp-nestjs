@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { AdvancedTutorial } from 'src/models/advanced-tutorial';
 
-// TODO: fix type
-export const advancedTutorialProgress: any[] = [
+export const advancedTutorialProgress: AdvancedTutorial[] = [
   {
     userId: 1,
     one: false,
@@ -14,7 +14,7 @@ export const advancedTutorialProgress: any[] = [
 @Injectable()
 export class AdvancedTutorialService {
 
-  async updateAdvancedTutorialProgress(userId: number, advancedTutorialRequest: any): Promise<any | null> {
+  async updateAdvancedTutorialProgress(userId: number, advancedTutorialRequest: AdvancedTutorial): Promise<any | null> {
     const progressToUpdateIndex: number = advancedTutorialProgress.findIndex((advancedTutorial: any) => advancedTutorial.userId === userId);
 
     if (progressToUpdateIndex !== -1) {
