@@ -10,6 +10,8 @@ import { BasicTutorialService, basicTutorialProgress } from './basic-tutorial/ba
 import { UpdateBasicTutorialDto } from './models/update-basic-tutorial';
 import { BasicTutorial } from './models/basic-tutorial';
 import { AdvancedTutorialService, advancedTutorialProgress } from './advanced-tutorial/advanced-tutorial.service';
+import { AdvancedTutorial } from './models/advanced-tutorial';
+import { UpdateAdvancedTutorialDto } from './models/update-advanced-tutorial';
 
 @Controller()
 export class AppController {
@@ -57,15 +59,14 @@ export class AppController {
 
   @UseGuards(JwtGuard)
   @Put('/v1/advanced-tutorial/progress')
-  async updateAdvancedTutorialProgress(@Request() req, @Body() advancedTutorialRequest: any) {
+  async updateAdvancedTutorialProgress(@Request() req, @Body() advancedTutorialRequest: UpdateAdvancedTutorialDto) {
     return this._advancedTutorialService.updateAdvancedTutorialProgress(req.user.userId, advancedTutorialRequest);
   }
 
   @UseGuards(JwtGuard)
   @Get('/v1/advanced-tutorial/progress')
   async getAdvancedTutorialProgress(@Request() req) {
-    // TODO: fix type
-    return advancedTutorialProgress.find((advancedTutorial: any) => advancedTutorial.userId === req.user.userId);
+    return advancedTutorialProgress.find((advancedTutorial: AdvancedTutorial) => advancedTutorial.userId === req.user.userId);
   }
 
   @UseGuards(JwtGuard)
