@@ -25,25 +25,6 @@ export class AppController {
     ]);
   }
 
-  @UseGuards(LocalAuthGuard)
-  @Post('/v1/auth/login')
-  async login(@Request() req): Promise<{ access_token: string }> {
-    return this._authService.login(req.user);
-  }
-
-  @Post('/v1/auth/register')
-  async register(@Body() registerDTO: RegisterDTO): Promise<{ access_token: string }> {
-    const { username, password, confirmPassword } = registerDTO;
-
-    if (!username || !password) {
-      throw new BadRequestException('Username and password are required');
-    }
-    if (password !== confirmPassword) {
-      throw new BadRequestException('Passwords do not match');
-    }
-
-    return this._authService.register(username, password);
-  }
 
   @UseGuards(JwtGuard)
   @Put('/v1/basic-tutorial/progress')
