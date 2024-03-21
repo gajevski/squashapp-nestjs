@@ -1,11 +1,9 @@
-import { Controller, Get, Post, UseGuards, Request, BadRequestException, Body, Put } from '@nestjs/common';
+import { Controller, Get, UseGuards, Request, Body, Put } from '@nestjs/common';
 import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
-import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtGuard } from './auth/jwt.auth.guard';
 import { User } from './models/user';
 import { users } from './users/users.service';
-import { RegisterDTO } from './models/register';
 import { BasicTutorialService, basicTutorialProgress } from './basic-tutorial/basic-tutorial.service';
 import { UpdateBasicTutorialDto } from './models/update-basic-tutorial';
 import { BasicTutorial } from './models/basic-tutorial';
@@ -15,7 +13,7 @@ import { UpdateAdvancedTutorialDto } from './models/update-advanced-tutorial';
 
 @Controller()
 export class AppController {
-  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _authService: AuthService, private _basicTutorialService: BasicTutorialService, private _advancedTutorialService: AdvancedTutorialService) { }
+  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _basicTutorialService: BasicTutorialService, private _advancedTutorialService: AdvancedTutorialService) { }
 
   @Get('v1/status')
   @HealthCheck()
