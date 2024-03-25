@@ -3,13 +3,10 @@ import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/te
 import { JwtGuard } from './auth/jwt.auth.guard';
 import { User } from './models/user';
 import { users } from './users/users.service';
-import { BasicTutorialService, basicTutorialProgress } from './basic-tutorial/basic-tutorial.service';
-import { UpdateBasicTutorialDto } from './models/update-basic-tutorial';
-import { BasicTutorial } from './models/basic-tutorial';
 
 @Controller()
 export class AppController {
-  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator, private _basicTutorialService: BasicTutorialService) { }
+  constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator) { }
 
   @Get('v1/status')
   @HealthCheck()
