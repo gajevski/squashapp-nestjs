@@ -19,20 +19,6 @@ export class AppController {
     ]);
   }
 
-
-  @UseGuards(JwtGuard)
-  @Put('/v1/basic-tutorial/progress')
-  async updateBasicTutorialProgress(@Request() req, @Body() basicTutorialRequest: UpdateBasicTutorialDto) {
-    return this._basicTutorialService.updateBasicTutorialProgress(req.user.userId, basicTutorialRequest);
-  }
-
-  @UseGuards(JwtGuard)
-  @Get('/v1/basic-tutorial/progress')
-  async getBasicTutorialProgress(@Request() req) {
-    return basicTutorialProgress.find((basicTutorial: BasicTutorial) => basicTutorial.userId === req.user.userId);
-  }
-
-
   @UseGuards(JwtGuard)
   @Get('/v1/user/profile')
   getProfile(@Request() req): User | undefined {
