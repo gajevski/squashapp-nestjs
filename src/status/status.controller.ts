@@ -5,7 +5,7 @@ import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/te
 export class StatusController {
     constructor(private _healthCheckService: HealthCheckService, private _http: HttpHealthIndicator) { }
 
-    @Get('v1/status')
+    @Get('/v1/status')
     @HealthCheck()
     statusCheck() {
         return this._healthCheckService.check([
