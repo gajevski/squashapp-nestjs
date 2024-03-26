@@ -8,9 +8,10 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { BasicTutorialModule } from './basic-tutorial/basic-tutorial.module';
 import { AdvancedTutorialModule } from './advanced-tutorial/advanced-tutorial.module';
+import { StatusModule } from './status/status.module';
 
 @Module({
-  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, AdvancedTutorialModule, ConfigModule.forRoot()],
+  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, AdvancedTutorialModule, ConfigModule.forRoot(), StatusModule],
   controllers: [AppController],
   providers: [AppService],
 })
