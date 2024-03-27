@@ -11,7 +11,7 @@ import { AdvancedTutorialModule } from './advanced-tutorial/advanced-tutorial.mo
 import { StatusModule } from './status/status.module';
 
 @Module({
-  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, AdvancedTutorialModule, ConfigModule.forRoot(), StatusModule],
+  imports: [TerminusModule, HttpModule, AuthModule, UsersModule, BasicTutorialModule, AdvancedTutorialModule, StatusModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
