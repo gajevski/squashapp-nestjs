@@ -4,18 +4,18 @@ import { JwtGuard } from 'src/auth/jwt.auth.guard';
 import { AdvancedTutorial } from 'src/models/advanced-tutorial';
 import { UpdateAdvancedTutorialDto } from 'src/models/update-advanced-tutorial';
 
-@Controller('v1/advanced-tutorial/progress')
+@Controller('v1/advanced-tutorial')
 export class AdvancedTutorialController {
     constructor(private _advancedTutorialService: AdvancedTutorialService) { }
 
     @UseGuards(JwtGuard)
-    @Put('/v1/advanced-tutorial/progress')
+    @Put('/progress')
     async updateAdvancedTutorialProgress(@Request() req, @Body() advancedTutorialRequest: UpdateAdvancedTutorialDto) {
         return this._advancedTutorialService.updateAdvancedTutorialProgress(req.user.userId, advancedTutorialRequest);
     }
 
     @UseGuards(JwtGuard)
-    @Get('/v1/advanced-tutorial/progress')
+    @Get('/progress')
     async getAdvancedTutorialProgress(@Request() req) {
         return advancedTutorialProgress.find((advancedTutorial: AdvancedTutorial) => advancedTutorial.userId === req.user.userId);
     }
