@@ -58,7 +58,6 @@ export class UsersService {
               matchesPlayed: 0,
               matchesWon: 0,
               matchesLost: 0,
-              winratio: 0,
             },
             activities: []
           };
