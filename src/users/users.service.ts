@@ -19,7 +19,6 @@ export const users: User[] = [
             matchesPlayed: 10,
             matchesWon: 6,
             matchesLost: 4,
-            winratio: 60,
         },
         activities: [
             { id: 1, activityName: "Squash Match", date: "2023-10-01" },
