@@ -1,31 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/models/user';
+import fs from 'fs';
+import path from 'path';
 
-export const users: User[] = [
-    {
-        userId: 1,
-        username: "first",
-        password: "first",
-        image: "https://avatars.githubusercontent.com/u/29663156?v=4",
-        racket: {
-            name: "Wilson Hyper Hammer 120",
-            image: "https://www.squashtime.pl/images/thumbs/640_720/WRT967700_wilson_01.jpg",
-            purchaseDate: "October 2023",
-            totalMatchesPlayed: 26,
-            grip: "Toalson Ultra Grip 3Pack Black",
-            string: "Default"
-        },
-        statistics: {
-            matchesPlayed: 10,
-            matchesWon: 6,
-            matchesLost: 4,
-        },
-        activities: [
-            { id: 1, activityName: "Squash Match", date: "2023-10-01" },
-            { id: 2, activityName: "Training Session", date: "2023-10-02" }
-        ]
-    },
-]
+const DB_PATH = path.resolve(__dirname, '..', 'db.json');
+
+let users: User[] = [];
+
+try {
+    const data = fs.readFileSync(DB_PATH, 'utf-8');
+    users = JSON.parse(data);
+} catch (error) {
+    console.error('Failed to read or parse db.json', error);
+}
 
 @Injectable()
 export class UsersService {
@@ -37,17 +24,24 @@ export class UsersService {
     async createUser(username: string, password: string): Promise<User> {
         const existingUser = users.find(user => user.username === username);
         if (existingUser) {
-          throw new Error('User already exists');
+            throw new Error('User already exists');
         }
-    
-        const newUser: User = this._createUserObject(username, password);
-    
-        users.push(newUser);
-    
-        return newUser;
-      }
 
-      private _createUserObject(username: string, password: string): User {
+        const newUser: User = this._createUserObject(username, password);
+
+        users.push(newUser);
+
+        try {
+            fs.writeFileSync(DB_PATH, JSON.stringify(users, null, 2));
+        } catch (error) {
+            console.error('Failed to write to db.json', error);
+            throw new Error('Failed to save user');
+        }
+
+        return newUser;
+    }
+
+    private _createUserObject(username: string, password: string): User {
         return {
             userId: Date.now(),
             username: username,
@@ -55,11 +49,11 @@ export class UsersService {
             image: "",
             racket: null,
             statistics: {
-              matchesPlayed: 0,
-              matchesWon: 0,
-              matchesLost: 0,
+                matchesPlayed: 0,
+                matchesWon: 0,
+                matchesLost: 0,
             },
             activities: []
-          };
-      }
+        };
+    }
 }
